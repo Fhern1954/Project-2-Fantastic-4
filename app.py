@@ -93,9 +93,16 @@ def countries_top10():
         elif k == "genre":
             mongo_query["genre"] = v
         elif k == "startyear":
-            mongo_query["year"] = {"$gte": v}
+            if "year" in mongo_query:
+                mongo_query["year"]["$gte"] = v
+            else:
+                mongo_query["year"] = {"$gte":v}
         elif k == "endyear":
-            mongo_query["year"] = {"$lte": v}
+            if "year" in mongo_query:
+                mongo_query["year"]["$lte"] = v
+            else:
+                mongo_query["year"] = {"$lte":v}
+                
             
     data = mongo.db.movies.find(mongo_query)
     sorted_data = list(data.sort("avg_vote",-1)[0:10])
@@ -104,7 +111,8 @@ def countries_top10():
         response.append({
             "title": document["title"],
             "country": document["country"],
-            "genre": document["genre"]
+            "genre": document["genre"],
+            "year":document["year"]
         })
         print(document["title"], document["country"], document["genre"])
 

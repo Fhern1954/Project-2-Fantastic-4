@@ -36,9 +36,30 @@ function buildtable(query_string) {
         });
     }
 
-function optionChanged(id) {
+function optionChanged(filter_type, value) {
         //Check the value of each options
+        var c_dropdown = d3.select("#selcountryDataset");
+        var g_dropdown = d3.select("#selgenreDataset");
+        var startyear_dropdown = d3.select("#selstartyearDataset"); 
+        var endyear_dropdown = d3.select("#selendyearDataset"); 
+        query_string="?"
         //if value exists, build query string
+        if (c_dropdown.property("value")) {
+            country = c_dropdown.property("value");
+            query_string = query_string + "country=" + country + "&"
+        }
+        if (g_dropdown.property("value")) {
+            genre = g_dropdown.property("value");
+            query_string = query_string + "genre=" + genre + "&"
+        }  
+        if (startyear_dropdown.property("value")) {
+            startyear = startyear_dropdown.property("value");
+            query_string = query_string + "startyear=" + startyear + "&"
+        }
+        if (endyear_dropdown.property("value")) {
+            endyear = endyear_dropdown.property("value");
+            query_string = query_string + "endyear=" + endyear
+        }        
         // query_string="?"
         // if country:
             // query_string = query_string + "country=" + country + "&"
@@ -62,8 +83,8 @@ function init() {
             });
 
         c_dropdown.property('value','USA');
-
-        buildtable("USA");      
+        query_string = "?country=" + 'USA' + "&" + "genre="  + 'Action' + "&" + "startyear=2015" + "&endyear=2020"  
+        buildtable(query_string);      
     
         });
         
@@ -91,7 +112,7 @@ function init() {
             startyear_dropdown.append("option").text(years).property("value");
                 });
 
-                startyear_dropdown.property('value','2019');        
+                startyear_dropdown.property('value','2015');        
         
         });
 

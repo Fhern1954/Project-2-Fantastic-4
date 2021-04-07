@@ -29,7 +29,7 @@
         <div class="well well-sm">
             <h5>Countries</h5>
             <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px"></p>
-              <select id="selcountryDataset" onchange="optionChanged(this.value)"></select>
+              <select id="selcountryDataset" onchange="optionChanged('country', this.value)"></select>
             <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">  
         </div>
       </div>
@@ -37,7 +37,7 @@
         <div class="well well-sm">
           <h5>Genre</h5>
           <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">
-            <select id="selgenreDataset" onchange="optionChanged(this.value)"></select>
+            <select id="selgenreDataset" onchange="optionChanged('genre', this.value)"></select>
           </p>
         </div> 
       </div>
@@ -46,9 +46,9 @@
           <h5>Year Range:</h5>
           <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">
             Start:
-            <select id="selstartyearDataset" onchange="optionChanged(this.value)"></select>
+            <select id="selstartyearDataset" onchange="optionChanged('startyear', this.value)"></select>
             End:
-            <select id="selendyearDataset" onchange="optionChanged(this.value)"></select>
+            <select id="selendyearDataset" onchange="optionChanged('endyear', this.value)"></select>
           </p>
                    
         </div> 
@@ -63,6 +63,7 @@
               <th class="table-head">Country</th>
               <th class="table-head">Genre</th>
               <th class="table-head">Title</th>
+              <th class="table-head">Year</th>
             </tr>
           </thead>
           <tbody></tbody>
