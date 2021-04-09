@@ -51,7 +51,8 @@ def countries():
                 if c_list not in unique_country_list:
                     unique_country_list.append(c_list)
     unique_country_list.sort()
-    sorted_country_dict["country"] = unique_country_list
+    final_list = ["All"] + unique_country_list
+    sorted_country_dict["country"] = final_list
     return jsonify(sorted_country_dict)  
 
 
@@ -70,7 +71,8 @@ def genres():
                 if genre_list not in unique_genre_list:
                     unique_genre_list.append(genre_list)
     unique_genre_list.sort()
-    sorted_genre_dict["genre"] = unique_genre_list
+    final_list = ["All"] + unique_genre_list
+    sorted_genre_dict["genre"] = final_list
     return jsonify(sorted_genre_dict)
 
 @app.route("/year")
@@ -82,11 +84,11 @@ def year():
     sorted_year_dict["year"] = year_list
     return jsonify(sorted_year_dict)             
    
-@app.route("/top_movies")
-def countries_top10():
+@app.route("/top_movies_table")
+def countries_table_top10():
     query_string = request.args
     print(query_string)
-    mongo_query = {"votes": {"$gte":"300"}}
+    mongo_query = {"votes": {"$gte":"200"}}
     for k, v in query_string.items():
         if k == "country":
             mongo_query["country"] = v
@@ -106,31 +108,56 @@ def countries_top10():
             
     data = mongo.db.movies.find(mongo_query)
     sorted_data = list(data.sort("avg_vote",-1)[0:10])
-    response = []
+    table_response = []
     for document in sorted_data:
-        response.append({
+        table_response.append({
             "title": document["title"],
             "country": document["country"],
             "genre": document["genre"],
-            "year":document["year"]
+            "year":document["year"],
+            "rating":document["avg_vote"],
+            "numberofvotes":document["votes"]
+
         })
-        print(document["title"], document["country"], document["genre"])
+        # print(document["title"], document["country"], document["genre"])
 
+    return jsonify(table_response)
 
-    # topmovies_bycountry = []
-    # topmovies = {}
-    # # display_data = sorted_data["imdb_title_id","original_title","year","avg_vote","votes"]
-    # # box_office_data = sorted_data["imdb_title_id","original_title","budget","worldwide_gross_income"]
-    # json_data = dumps(sorted_data)
-    # # for data in json_data:
-    # #     topmovies_bycountry.append(json_data[data])
-    # # for topmov in sorted_data:
-    # #     tm = topmov.split('_id')
-    # #     for tm_list in tm:
-    # #         topmovies_bycountry.append(tm_list)
-    # # topmovies["movies"] = topmovies_bycountry 
-    # topmovies["movies"] = json_data 
-    return jsonify(response)
+@app.route("/top_movies_graph")
+def countries_graph_top10():
+    query_string = request.args
+    print(query_string)
+    mongo_query = {"votes": {"$gte":"200"}}
+    for k, v in query_string.items():
+        if k == "country":
+            mongo_query["country"] = v
+        elif k == "genre":
+            mongo_query["genre"] = v
+        elif k == "startyear":
+            if "year" in mongo_query:
+                mongo_query["year"]["$gte"] = v
+            else:
+                mongo_query["year"] = {"$gte":v}
+        elif k == "endyear":
+            if "year" in mongo_query:
+                mongo_query["year"]["$lte"] = v
+            else:
+                mongo_query["year"] = {"$lte":v}
+                
+            
+    data = mongo.db.movies.find(mongo_query)
+    sorted_data = list(data.sort("avg_vote",-1)[0:10])
+    graph_response = []
+    for document in sorted_data:
+        graph_response.append({
+            "title": document["title"],
+            "budget":document["budget"],
+            "worldwide_gross_income": document["worlwide_gross_income"]
+
+        })
+        # print(document["title"], document["country"], document["genre"])
+
+    return jsonify(graph_response)    
     
 
 @app.route("/top_movies_by_genre/<genre>")
