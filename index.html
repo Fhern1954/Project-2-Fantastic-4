@@ -7,10 +7,22 @@
   <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
   <title>Movies Database</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
 
   <style>
-    .well-sm{padding:19px} 
-   .well{padding:19px}
+    .well-sm {
+      padding: 19px
+    }
+
+    .well {
+      padding: 19px
+    }
   </style>
 
 </head>
@@ -27,21 +39,21 @@
     <div class="row">
       <div class="col-md-4">
         <div class="well well-sm">
-            <h5>Countries</h5>
-            <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px"></p>
-              <select id="selcountryDataset" onchange="optionChanged('country', this.value)"></select>
-            <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">  
+          <h5>Countries</h5>
+          <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px"></p>
+          <select id="selcountryDataset" onchange="optionChanged('country', this.value)"></select>
+          <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">
         </div>
       </div>
-      <div class="col-md-2"> 
+      <div class="col-md-2">
         <div class="well well-sm">
           <h5>Genre</h5>
           <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">
             <select id="selgenreDataset" onchange="optionChanged('genre', this.value)"></select>
           </p>
-        </div> 
+        </div>
       </div>
-      <div class="col-md-6"> 
+      <div class="col-md-6">
         <div class="well well-sm">
           <h5>Year Range:</h5>
           <p style="font-family:Arial, Helvetica, sans-serif;font-size:14px">
@@ -50,41 +62,50 @@
             End:
             <select id="selendyearDataset" onchange="optionChanged('endyear', this.value)"></select>
           </p>
-                   
-        </div> 
-      </div>
-    </div> 
-    
-    <div class="col-md-6">
-      <div id="table-area" class="">
-        <table id="ufo-table" class="table table-striped">
-          <thead>
-            <tr>
-              <th class="table-head">Country</th>
-              <th class="table-head">Genre</th>
-              <th class="table-head">Number of Votes</th>
-              <th class="table-head">Rating</th>
-              <th class="table-head">Title</th>
-              <th class="table-head">Year</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+
+        </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div id="bar"></div>
-    </div>  
-</div>
-    
+    <div class="row">
+      <div class="col-md-6">
+        <div id="table-area" class="">
+          <table id="movie-table" class="table table-striped">
+            <thead>
+              <tr>
+                <th class="table-head">Country</th>
+                <th class="table-head">Genre</th>
+                <th class="table-head">Number of Votes</th>
+                <th class="table-head">Rating</th>
+                <th class="table-head">Title</th>
+                <th class="table-head">Year</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div id="bar"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <iframe id="map" src="map.html" frameborder="0" width="100%" height="500"></iframe>
+      </div>
+    </div>
+
+  </div>
+
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="config.js"></script>
+  <script src="map.js"></script>
   <script src="data.js"></script>
   <!-- <script src="./static/js/bonus.js"></script> -->
   <!-- <script src="samples.json"></script> -->
-  
+
 </body>
 
 </html>

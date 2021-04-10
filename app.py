@@ -226,7 +226,57 @@ def top_movies(country,genre,year):
     display_data = sorted_data["imdb_title_id","original_title","year","country","genre","avg_vote","votes"]
     box_office_data = sorted_data["imdb_title_id","original_title","budget","worldwide_gross_income"]
 
-    return jsonify(display_data,box_office_data)                      
+    return jsonify(display_data,box_office_data) 
+
+@app.route("/movies_map")
+def countries_map():
+    country_count = {}
+    query_string = request.args
+    print(query_string)
+    mongo_query = {"votes": {"$gte":"200"}}
+    for k, v in query_string.items():
+        if k == "genre":
+            mongo_query["genre"] = v
+        elif k == "startyear":
+            if "year" in mongo_query:
+                mongo_query["year"]["$gte"] = v
+            else:
+                mongo_query["year"] = {"$gte":v}
+        elif k == "endyear":
+            if "year" in mongo_query:
+                mongo_query["year"]["$lte"] = v
+            else:
+                mongo_query["year"] = {"$lte":v}
+    data = mongo.db.movies.find(mongo_query)
+    sorted_data = list(data)
+
+    countries = mongo.db.movies.find().distinct('country')
+    country_list = list(countries)
+    unique_country_list = []
+    sorted_country_dict = {}
+    # Iterate through the outer list
+    for countries in country_list:
+        c = countries.split(', ')
+        for c_list in c:
+            if c_list != "":
+                if c_list not in unique_country_list:
+                    unique_country_list.append(c_list)
+                    country_count[c_list] = 0;
+    unique_country_list.sort()
+    
+    for result in sorted_data:
+        for country in unique_country_list:
+            if country in result["country"]:
+                country_count[country] += 1;
+
+
+    # map_response = []
+    # for document in sorted_data:
+    #     map_response.append({
+    #         "country": document["country"]
+    #     })
+        # print(document["title"], document["country"], document["genre"])
+    return jsonify(country_count)                         
       
 
 

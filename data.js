@@ -85,11 +85,12 @@ function buildGraph(query_string) {
             },
             barmode: 'overlay'
         };
-        var barData = [trace1, trace2];
+        var barData = [trace2, trace1];
         Plotly.newPlot("bar", barData, barLayout);
     }
     )
 }
+
 
 function optionChanged(filter_type, value) {
     //Check the value of each options
@@ -122,6 +123,7 @@ function optionChanged(filter_type, value) {
     //query_string = query_string + "genre=" + genre + "&" 
     buildtable(query_string);
     buildGraph(query_string);
+    buildMap(query_string);
     // getDemoInfo(id);
 }
 
