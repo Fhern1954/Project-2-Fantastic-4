@@ -17,11 +17,38 @@
 
   <style>
     .well-sm {
-      padding: 19px
+      padding: 19px;
+      height: 80px;
+      width: 555px
     }
 
     .well {
       padding: 19px
+    }
+
+    table {
+      border:thin;
+      color:black;
+    }
+
+    th {
+      /*...all th attributes like padding etc*/
+      background-color:#d4e3e5;
+      padding: 8px;
+      
+    }
+
+    tr {height:15px;
+    }
+
+    td{
+      width: 80px;
+      font-size: 11px;
+    }
+
+    th{
+      width: 80px;
+      font-size: 12px;
     }
   </style>
 
@@ -30,12 +57,51 @@
 <body>
 
   <div class="container">
-    <div class="row">
-      <div class="col-md-12 jumbotron text-center">
+    <!-- <div class="row">
+      <div class="col-md-12 text-center">
         <h1>Movies Dashboard</h1>
         <p>Use the interactive charts below to explore the dataset</p>
       </div>
+    </div> -->
+    <!-- Background image -->
+  <div
+  class="p-5 text-center"
+  style="
+    background-image: url('movie_banner1.jpg');
+    height: 40px;
+    ">
+  <div class="mask" style="background-color: rgba(210, 131, 32, 0.6);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Movies Dashboard</h1>
+             
+      </div>
     </div>
+  </div>
+</div>
+<!-- Background image -->
+<div class='row'>
+  <h4 class='p-5 text-center'>Total Movies by Country 2000 - 2020</h4>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <iframe id="map" src="map.html" frameborder="0" width="100%" height="450"></iframe>
+    <!-- <div id="map" style="width: 600px; height: 400px"></div> -->
+  </div>
+</div>
+<div>
+  <nav>
+    <div>
+      <!-- <div class="navbar-header"> -->
+        <a class="navbar-brand">
+          <img src="Cinima.jpg">
+        </a>
+        <h4 class='p-5 text-center'>Use the interactive charts below to explore the dataset</h4>
+      <!-- </div> -->
+    </div>
+  </nav>
+  </div>
     <div class="row">
       <div class="col-md-4">
         <div class="well well-sm">
@@ -70,11 +136,13 @@
       <div class="col-md-6">
         <div id="table-area" class="">
           <table id="movie-table" class="table table-striped">
+            <caption style="font-weight: bold;font-family:Arial">Top 10 Movies</caption>
+                
             <thead>
               <tr>
                 <th class="table-head">Country</th>
                 <th class="table-head">Genre</th>
-                <th class="table-head">Number of Votes</th>
+                <th class="table-head">No. of votes</th>
                 <th class="table-head">Rating</th>
                 <th class="table-head">Title</th>
                 <th class="table-head">Year</th>
@@ -88,11 +156,7 @@
         <div id="bar"></div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <iframe id="map" src="map.html" frameborder="0" width="100%" height="500"></iframe>
-      </div>
-    </div>
+    
 
   </div>
 

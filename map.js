@@ -28,9 +28,9 @@ function buildMap(query_string) {
 
 //Create heatmap.
 var myMap = L.map("map", {
-    center: [0, 0],
+    center: [20, 0],
     // center: [0, 0, 1],
-    zoom: 1,
+    zoom: 1.5,
 });
 
 var tileLayer = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -45,7 +45,7 @@ var tileLayer = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}
 
 var markers = [];
 var markerLayer = null;
-d3.json("http://127.0.0.1:5000/movies_map?startyear=1970&endyear=2020").then((data) => {
+d3.json("http://127.0.0.1:5000/movies_map?startyear=2000&endyear=2020").then((data) => {
 
     d3.json("countries.json").then((response) => {
         countries_coord = response.map(country => country.name)
@@ -63,7 +63,7 @@ d3.json("http://127.0.0.1:5000/movies_map?startyear=1970&endyear=2020").then((da
         }
 
         markerLayer = L.layerGroup(markers).addTo(myMap);
-
+        
     });
 
 });

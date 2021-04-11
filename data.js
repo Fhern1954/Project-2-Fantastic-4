@@ -80,6 +80,7 @@ function buildGraph(query_string) {
         }
         var barLayout = {
             title: 'Financial Performance',
+            font:{family:'Arial bold',size:12,backgroundcolor:'#867E7E'},            
             xaxis: {
                 tickangle: -45,
             },
@@ -140,7 +141,7 @@ function init() {
             c_dropdown.append("option").text(countries).property("value");
         });
 
-        query_string = "?startyear=1970" + "&endyear=2020"
+        query_string = "?startyear=2000" + "&endyear=2020"
         buildtable(query_string);
         buildGraph(query_string);
 
@@ -170,7 +171,7 @@ function init() {
             startyear_dropdown.append("option").text(years).property("value");
         });
 
-        startyear_dropdown.property('value', '1970');
+        startyear_dropdown.property('value', '2000');
 
     });
 
