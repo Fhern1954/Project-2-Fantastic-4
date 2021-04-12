@@ -82,7 +82,7 @@ function buildGraph(query_string) {
             title: 'Financial Performance',
             font:{family:'Arial bold',size:12,backgroundcolor:'#867E7E'},            
             xaxis: {
-                tickangle: -45,
+                tickangle: -30,
             },
             barmode: 'overlay'
         };
