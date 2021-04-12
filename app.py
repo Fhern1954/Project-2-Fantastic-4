@@ -150,7 +150,7 @@ def countries_graph_top10():
     graph_response = []
     for document in sorted_data:
         graph_response.append({
-            "title": document["title"],
+            "title": document["original_title"],
             "budget":document["budget"],
             "worldwide_gross_income": document["worlwide_gross_income"]
 
