@@ -111,7 +111,7 @@ def countries_table_top10():
     table_response = []
     for document in sorted_data:
         table_response.append({
-            "title": document["title"],
+            "title": document["original_title"],
             "country": document["country"],
             "genre": document["genre"],
             "year":document["year"],
